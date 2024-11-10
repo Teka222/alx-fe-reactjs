@@ -1,12 +1,16 @@
 import React from 'react';
-import WelcomeMessage from './components/WelcomeMessage'; // Make sure this import is correct
+import Header from './components/Header';
+import MainContent from './components/MainContent';
+import Footer from './components/Footer';
 
 function App() {
-  return (
-    <div>
-      <WelcomeMessage /> {/* Ensure this component is included here */}
-    </div>
-  );
+    return (
+        <div>
+            <Header /> {/* Header component */}
+            <MainContent /> {/* MainContent component */}
+            <Footer /> {/* Footer component */}
+        </div>
+    );
 }
 
 export default App;
