@@ -1,7 +1,8 @@
+// src/UserContext.js
 import React from 'react';
 
-// This creates a context. We'll use this to share the user data
-const UserContext = React.createContext();
+// Creating the context that will hold our user data
+const UserContext = React.createContext(); 
 
-// Export it so we can use it in other files
+// Exporting the context so we can use it in other files
 export default UserContext;
