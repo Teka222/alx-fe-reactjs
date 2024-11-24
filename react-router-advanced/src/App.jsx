@@ -1,17 +1,23 @@
-/ src/App.jsx
+// src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Profile from './components/Profile';
-import BlogPost from './components/BlogPost';  // Import the BlogPost component
+import Login from './components/Login';
 import Home from './components/Home';
+import ProtectedRoute from './components/ProtectedRoute';  // Import ProtectedRoute
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/profile/*" element={<Profile />} />
-        <Route path="/blog/:id" element={<BlogPost />} />  {/* Add dynamic route */}
+        <Route path="/login" element={<Login />} />
+        
+        {/* Wrap the Profile route with ProtectedRoute */}
+        <Route 
+          path="/profile" 
+          element={<ProtectedRoute element={<Profile />} />} 
+        />
       </Routes>
     </Router>
   );
