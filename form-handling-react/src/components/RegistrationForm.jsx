@@ -1,66 +1,83 @@
-import React, { useState } from "react";
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
+  // Formik setup
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      username: Yup.string()
+        .min(3, "Username must be at least 3 characters long")
+        .max(15, "Username must be 15 characters or less")
+        .matches(/^[a-zA-Z0-9_]*$/, "Username can only contain letters, numbers, and underscores")
+        .required("Username is required."),
+      email: Yup.string()
+        .email("Invalid email format.")
+        .required("Email is required."),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required."),
+    }),
+    onSubmit: (values) => {
+      console.log("Form submitted", values);
+    },
   });
 
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = {};
-    if (!formData.username) newErrors.username = "Username is required.";
-    if (!formData.email) newErrors.email = "Email is required.";
-    if (!formData.password) newErrors.password = "Password is required.";
-    setErrors(newErrors);
-
-    if (Object.keys(newErrors).length === 0) {
-      // Simulate API call
-      console.log("Form Submitted", formData);
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={formik.handleSubmit}>
       <div>
-        <label>Username</label>
+        <label htmlFor="username">Username</label>
         <input
-          type="text"
+          id="username"
           name="username"
-          value={formData.username} // Controlled component
-          onChange={handleChange}
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.username}  {/* Bind value to Formik state */}
         />
-        {errors.username && <p>{errors.username}</p>}
+        {formik.touched.username && formik.errors.username ? (
+          <div>{formik.errors.username}</div>
+        ) : null}
       </div>
+
       <div>
-        <label>Email</label>
+        <label htmlFor="email">Email</label>
         <input
-          type="email"
+          id="email"
           name="email"
-          value={formData.email} // Controlled component
-          onChange={handleChange}
+          type="email"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.email}  {/* Bind value to Formik state */}
         />
-        {errors.email && <p>{errors.email}</p>}
+        {formik.touched.email && formik.errors.email ? (
+          <div>{formik.errors.email}</div>
+        ) : null}
       </div>
+
       <div>
-        <label>Password</label>
+        <label htmlFor="password">Password</label>
         <input
-          type="password"
+          id="password"
           name="password"
-          value={formData.password} // Controlled component
-          onChange={handleChange}
+          type="password"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}  {/* Bind value to Formik state */}
         />
-        {errors.password && <p>{errors.password}</p>}
+        {formik.touched.password && formik.errors.password ? (
+          <div>{formik.errors.password}</div>
+        ) : null}
       </div>
-      <button type="submit">Register</button>
+
+      <div>
+        <button type="submit">Submit</button>
+      </div>
     </form>
   );
 };
