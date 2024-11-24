@@ -10,13 +10,26 @@ const RegistrationForm = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError(""); // Clear previous errors
+
+    // Validation for username, email, and password
     if (!username || !email || !password) {
       setError("All fields are required!");
       return;
     }
+
+    if (!email.includes("@")) {
+      setError("Please enter a valid email address!");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long!");
+      return;
+    }
+
     // Here you would typically send the data to a backend API
     console.log({ username, email, password });
-    setError(""); // Clear error message after successful submission
   };
 
   return (
