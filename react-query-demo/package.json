@@ -1,0 +1,21 @@
+{
+  "name": "react-query-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-query": "^3.0.0"
+  },
+  "devDependencies": {
+    "vite": "^3.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}
