@@ -23,7 +23,6 @@ const RegistrationForm = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      // Simulate API call
       console.log("Form Submitted", formData);
     }
   };
