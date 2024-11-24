@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRecipeStore } from './recipeStore';
+import { Link } from 'react-router-dom';  // Import Link for navigation
 import RecipeCard from './RecipeCard'; // Assuming you have a RecipeCard component for individual recipe display
 
 const RecipeList = () => {
@@ -17,7 +18,9 @@ const RecipeList = () => {
         <p>No recipes found</p>
       ) : (
         recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
+          <Link key={recipe.id} to={`/recipe/${recipe.id}`} style={{ textDecoration: 'none' }}>
+            <RecipeCard recipe={recipe} />
+          </Link>
         ))
       )}
     </div>
