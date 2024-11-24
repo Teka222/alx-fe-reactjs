@@ -1,34 +1,53 @@
 import React, { useState } from "react";
 
 const RegistrationForm = () => {
-  // State for each input field
+  // States for form fields and errors
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
-
-    // Validation for username, email, and password
-    if (!username || !email || !password) {
-      setError("All fields are required!");
-      return;
+    
+    // Reset errors before validation
+    setErrors({ username: "", email: "", password: "" });
+    
+    let hasError = false;
+    
+    // Validate username
+    if (!username) {
+      setErrors((prevErrors) => ({ ...prevErrors, username: "Username is required!" }));
+      hasError = true;
     }
 
-    if (!email.includes("@")) {
-      setError("Please enter a valid email address!");
-      return;
+    // Validate email
+    if (!email) {
+      setErrors((prevErrors) => ({ ...prevErrors, email: "Email is required!" }));
+      hasError = true;
+    } else if (!email.includes("@")) {
+      setErrors((prevErrors) => ({ ...prevErrors, email: "Please enter a valid email address!" }));
+      hasError = true;
     }
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters long!");
-      return;
+    // Validate password
+    if (!password) {
+      setErrors((prevErrors) => ({ ...prevErrors, password: "Password is required!" }));
+      hasError = true;
+    } else if (password.length < 6) {
+      setErrors((prevErrors) => ({ ...prevErrors, password: "Password must be at least 6 characters long!" }));
+      hasError = true;
     }
 
-    // Here you would typically send the data to a backend API
+    // If there are validation errors, prevent form submission
+    if (hasError) return;
+
+    // Form submission (successful case)
     console.log({ username, email, password });
   };
 
@@ -41,6 +60,7 @@ const RegistrationForm = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        {errors.username && <p style={{ color: "red" }}>{errors.username}</p>}
       </div>
       <div>
         <label>Email:</label>
@@ -49,6 +69,7 @@ const RegistrationForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
       </div>
       <div>
         <label>Password:</label>
@@ -57,11 +78,12 @@ const RegistrationForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
       </div>
-      {error && <p style={{ color: "red" }}>{error}</p>}
       <button type="submit">Submit</button>
     </form>
   );
 };
 
 export default RegistrationForm;
+
