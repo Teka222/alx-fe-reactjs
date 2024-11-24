@@ -1,8 +1,9 @@
-import React from 'react';
-import UserInfo from './UserInfo'; // UserInfo will get the user data from the context
+// src/UserInfo.jsx
+import UserDetails from './UserDetails';
 
-function ProfilePage() {
-  return <UserInfo />; // No need to pass userData here anymore
+function UserInfo() {
+  return <UserDetails />;
 }
 
-export default ProfilePage;
+export default UserInfo;
+
