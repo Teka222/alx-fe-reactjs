@@ -10,13 +10,13 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
-    "jest": "^29.5.0"
+    "jest": "^29.0.0"
   },
-  scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "test": "react-scripts test",   // Add this line
-  "eject": "react-scripts eject"
-}
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",  // This is the test script that should be present
+    "eject": "react-scripts eject"
   }
 }
+
