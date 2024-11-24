@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const RegistrationForm = () => {
-  // Formik setup
   const formik = useFormik({
     initialValues: {
       username: "", // Initial value for username
@@ -24,7 +23,7 @@ const RegistrationForm = () => {
         .required("Password is required."),
     }),
     onSubmit: (values) => {
-      console.log("Form submitted", values);
+      console.log("Form submitted", values); // Handle form submission
     },
   });
 
@@ -37,13 +36,13 @@ const RegistrationForm = () => {
           id="username"
           name="username"
           type="text"
-          onChange={formik.handleChange}  // Handle change via Formik
-          onBlur={formik.handleBlur}      // Handle blur via Formik
-          value={formik.values.username}  // Bind the value to Formik state
+          onChange={formik.handleChange}  // Formik's handleChange
+          onBlur={formik.handleBlur}      // Formik's handleBlur
+          value={formik.values.username}  // Bind value to Formik's state
         />
-        {formik.touched.username && formik.errors.username ? (
-          <div>{formik.errors.username}</div> // Show error if touched and error exists
-        ) : null}
+        {formik.touched.username && formik.errors.username && (
+          <div>{formik.errors.username}</div>
+        )}
       </div>
 
       {/* Email Field */}
@@ -53,13 +52,13 @@ const RegistrationForm = () => {
           id="email"
           name="email"
           type="email"
-          onChange={formik.handleChange}  // Handle change via Formik
-          onBlur={formik.handleBlur}      // Handle blur via Formik
-          value={formik.values.email}     // Bind the value to Formik state
+          onChange={formik.handleChange}  // Formik's handleChange
+          onBlur={formik.handleBlur}      // Formik's handleBlur
+          value={formik.values.email}     // Bind value to Formik's state
         />
-        {formik.touched.email && formik.errors.email ? (
-          <div>{formik.errors.email}</div> // Show error if touched and error exists
-        ) : null}
+        {formik.touched.email && formik.errors.email && (
+          <div>{formik.errors.email}</div>
+        )}
       </div>
 
       {/* Password Field */}
@@ -69,13 +68,13 @@ const RegistrationForm = () => {
           id="password"
           name="password"
           type="password"
-          onChange={formik.handleChange}  // Handle change via Formik
-          onBlur={formik.handleBlur}      // Handle blur via Formik
-          value={formik.values.password}  // Bind the value to Formik state
+          onChange={formik.handleChange}  // Formik's handleChange
+          onBlur={formik.handleBlur}      // Formik's handleBlur
+          value={formik.values.password}  // Bind value to Formik's state
         />
-        {formik.touched.password && formik.errors.password ? (
-          <div>{formik.errors.password}</div> // Show error if touched and error exists
-        ) : null}
+        {formik.touched.password && formik.errors.password && (
+          <div>{formik.errors.password}</div>
+        )}
       </div>
 
       {/* Submit Button */}
