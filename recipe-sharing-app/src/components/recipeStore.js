@@ -52,6 +52,9 @@ const useRecipeStore = create((set) => ({
     );
     return { recommendations: recommended };
   }),
+
+  // Action to set the entire list of recipes
+  setRecipes: (recipes) => set({ recipes }), // This sets the entire recipes array
 }));
 
 export { useRecipeStore };
