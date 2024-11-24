@@ -12,10 +12,11 @@
     "@testing-library/react": "^13.4.0",
     "jest": "^29.5.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "jest",  // Ensure this is present for running tests
-    "eject": "react-scripts eject"
+  scripts": {
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "test": "react-scripts test",   // Add this line
+  "eject": "react-scripts eject"
+}
   }
 }
