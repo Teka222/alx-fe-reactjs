@@ -1,5 +1,6 @@
 // src/components/TodoList.jsx
 import React, { useState } from 'react';
+import AddTodoForm from './AddTodoForm';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([
@@ -23,6 +24,7 @@ const TodoList = () => {
 
   return (
     <div>
+      <AddTodoForm addTodo={addTodo} />
       <ul>
         {todos.map((todo) => (
           <li
@@ -38,7 +40,6 @@ const TodoList = () => {
           </li>
         ))}
       </ul>
-      <button onClick={() => addTodo('New Todo')}>Add Todo</button>
     </div>
   );
 };
