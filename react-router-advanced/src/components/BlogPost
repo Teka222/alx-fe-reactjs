@@ -1,0 +1,10 @@
+// src/components/BlogPost.jsx
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+const BlogPost = () => {
+  const { id } = useParams(); // Get the 'id' parameter from the URL
+  return <div>Displaying Blog Post with ID: {id}</div>;
+};
+
+export default BlogPost;
