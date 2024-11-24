@@ -1,46 +1,22 @@
-// src/components/TodoList.jsx
-import React, { useState } from 'react';
+// src/__tests__/TodoList.test.js
+import { render, screen, fireEvent } from '@testing-library/react';
+import TodoList from '../components/TodoList';
 
-const TodoList = () => {
-  const [todos, setTodos] = useState([
-    { id: 1, text: 'Learn React', completed: false },
-    { id: 2, text: 'Learn Jest', completed: false },
-  ]);
+test('renders TodoList component', () => {
+  render(<TodoList />);
+  const todoItems = screen.getAllByRole('listitem');
+  expect(todoItems).toHaveLength(2);  // Initially two todos
+});
 
-  const addTodo = (text) => {
-    setTodos([...todos, { id: Date.now(), text, completed: false }]);
-  };
+test('adds a new todo', () => {
+  render(<TodoList />);
+  const inputField = screen.getByPlaceholderText('Add a new todo');
+  const addButton = screen.getByText('Add Todo');
 
-  const toggleTodo = (id) => {
-    setTodos(todos.map((todo) => 
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
-  };
+  fireEvent.change(inputField, { target: { value: 'New Todo' } });
+  fireEvent.click(addButton);
 
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
-
-  return (
-    <div>
-      <ul>
-        {todos.map((todo) => (
-          <li
-            key={todo.id}
-            onClick={() => toggleTodo(todo.id)}
-            style={{
-              textDecoration: todo.completed ? 'line-through' : 'none',
-              cursor: 'pointer',
-            }}
-          >
-            {todo.text}
-            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <button onClick={() => addTodo('New Todo')}>Add Todo</button>
-    </div>
-  );
-};
-
-export default TodoList;
+  const todoItems = screen.getAllByRole('listitem');
+  expect(todoItems).toHaveLength(3);  // One new todo should be added
+  expect(screen.getByText('New Todo')).toBeInTheDocument();
+});
