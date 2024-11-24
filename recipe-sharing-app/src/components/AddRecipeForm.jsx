@@ -1,15 +1,16 @@
-// EditRecipeForm.jsx
 import { useState } from 'react';
-import { useRecipeStore } from './recipeStore';
+import { useRecipeStore } from './recipeStore'; // Importing the Zustand store
 
-const EditRecipeForm = ({ recipe }) => {
-  const [title, setTitle] = useState(recipe.title);
-  const [description, setDescription] = useState(recipe.description);
-  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
+const AddRecipeForm = () => {
+  const addRecipe = useRecipeStore((state) => state.addRecipe); // Accessing addRecipe from Zustand store
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateRecipe({ ...recipe, title, description });
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevents the default form submission
+    addRecipe({ id: Date.now(), title, description }); // Adds a new recipe to the store
+    setTitle(''); // Resets the title field
+    setDescription(''); // Resets the description field
   };
 
   return (
@@ -19,31 +20,13 @@ const EditRecipeForm = ({ recipe }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
+        required
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Description"
-      />
-      <button type="submit">Update Recipe</button>
-    </form>
-  );
-};
-
-export default EditRecipeForm;
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        placeholder="Title"
-      />
-      <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
+        required
       />
       <button type="submit">Add Recipe</button>
     </form>
