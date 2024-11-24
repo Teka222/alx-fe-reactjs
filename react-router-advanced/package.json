@@ -1,0 +1,21 @@
+{
+  "name": "react-router-advanced",
+  "version": "1.0.0",
+  "main": "src/main.jsx",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.4.0",
+    "vite": "^4.0.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=16"
+  },
+  "license": "MIT"
+}
