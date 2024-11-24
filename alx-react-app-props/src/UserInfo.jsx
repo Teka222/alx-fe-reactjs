@@ -1,8 +1,8 @@
-import React from 'react';
-import UserDetails from './UserDetails';
+// src/ProfilePage.jsx
+import UserInfo from './UserInfo';
 
-function UserInfo() {
-  return <UserDetails />;
+function ProfilePage() {
+  return <UserInfo />; // No need to pass userData as a prop anymore
 }
 
-export default UserInfo;
+export default ProfilePage;
