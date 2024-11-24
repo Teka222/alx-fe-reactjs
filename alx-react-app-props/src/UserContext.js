@@ -1,13 +1,7 @@
-// src/UserContext.js
-import React, { createContext, useContext } from 'react';
+import { createContext } from "react";
 
-// Create a Context for user data
+// Create the context
 const UserContext = createContext();
 
-// Custom hook to use the UserContext
-export const useUser = () => useContext(UserContext);
-
-// Export the UserContext provider
-export const UserProvider = ({ children, value }) => {
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
-};
+// Export it so it can be used in other components
+export default UserContext;
