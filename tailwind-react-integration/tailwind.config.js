@@ -1,7 +1,11 @@
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"], // Paths to your templates
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"], // Purge CSS
+  darkMode: false, // Or 'media' or 'class'
   theme: {
     extend: {},
+  },
+  variants: {
+    extend: {}, // Extend variants for utilities
   },
   plugins: [],
 };
