@@ -4,36 +4,49 @@ function AddRecipeForm() {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [steps, setSteps] = useState('');
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
+
+  // Validation function
+  const validate = () => {
+    const newErrors = {};
+
+    if (!title) {
+      newErrors.title = 'Title is required.';
+    }
+    if (!ingredients) {
+      newErrors.ingredients = 'Ingredients are required.';
+    } else if (ingredients.split(',').length < 2) {
+      newErrors.ingredients = 'Please provide at least two ingredients separated by commas.';
+    }
+    if (!steps) {
+      newErrors.steps = 'Preparation steps are required.';
+    }
+
+    return newErrors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validationErrors = validate();
 
-    if (!title || !ingredients || !steps) {
-      setError('All fields are required!');
-      return;
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      // Proceed with form submission
+      const newRecipe = { title, ingredients, steps };
+      console.log('Submitted Recipe:', newRecipe);
+
+      // Reset the form fields and errors
+      setTitle('');
+      setIngredients('');
+      setSteps('');
+      setErrors({});
     }
-
-    if (ingredients.split(',').length < 2) {
-      setError('Please include at least two ingredients.');
-      return;
-    }
-
-    // Submit the data (for now, we'll just log it)
-    const newRecipe = { title, ingredients, steps };
-    console.log(newRecipe);
-
-    // Reset the form fields
-    setTitle('');
-    setIngredients('');
-    setSteps('');
-    setError('');
   };
 
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Add a New Recipe</h2>
-      {error && <div className="text-red-500 mb-4">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="title" className="block text-sm font-medium text-gray-700">Recipe Title</label>
@@ -42,9 +55,9 @@ function AddRecipeForm() {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 p-2 border border-gray-300 rounded w-full"
-            required
+            className={`mt-1 p-2 border ${errors.title ? 'border-red-500' : 'border-gray-300'} rounded w-full`}
           />
+          {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
         </div>
 
         <div>
@@ -54,10 +67,10 @@ function AddRecipeForm() {
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             rows="4"
-            className="mt-1 p-2 border border-gray-300 rounded w-full"
+            className={`mt-1 p-2 border ${errors.ingredients ? 'border-red-500' : 'border-gray-300'} rounded w-full`}
             placeholder="Separate ingredients with commas"
-            required
           />
+          {errors.ingredients && <p className="text-red-500 text-sm mt-1">{errors.ingredients}</p>}
         </div>
 
         <div>
@@ -67,9 +80,9 @@ function AddRecipeForm() {
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
             rows="6"
-            className="mt-1 p-2 border border-gray-300 rounded w-full"
-            required
+            className={`mt-1 p-2 border ${errors.steps ? 'border-red-500' : 'border-gray-300'} rounded w-full`}
           />
+          {errors.steps && <p className="text-red-500 text-sm mt-1">{errors.steps}</p>}
         </div>
 
         <div>
