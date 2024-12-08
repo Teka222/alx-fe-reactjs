@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import data from '../data.json'; // Adjust path if necessary
 
-function HomePage({ recipes }) {
+function HomePage() {
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    // Simulate fetching data from a file
+    setRecipes(data);
+  }, []);
+
   return (
     <div className="container mx-auto">
       <h1 className="text-2xl font-bold mb-4">Recipe Sharing Platform</h1>
