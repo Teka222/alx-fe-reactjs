@@ -32,11 +32,10 @@ function AddRecipeForm() {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      // Proceed with form submission
       const newRecipe = { title, ingredients, steps };
       console.log('Submitted Recipe:', newRecipe);
 
-      // Reset the form fields and errors
+      // Reset form fields and errors
       setTitle('');
       setIngredients('');
       setSteps('');
@@ -45,8 +44,8 @@ function AddRecipeForm() {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Add a New Recipe</h2>
+    <div className="container mx-auto p-4 md:p-8 shadow-lg rounded-lg">
+      <h2 className="text-2xl font-bold mb-4 text-center">Add a New Recipe</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="title" className="block text-sm font-medium text-gray-700">Recipe Title</label>
@@ -55,7 +54,7 @@ function AddRecipeForm() {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className={`mt-1 p-2 border ${errors.title ? 'border-red-500' : 'border-gray-300'} rounded w-full`}
+            className={`mt-1 p-2 border ${errors.title ? 'border-red-500' : 'border-gray-300'} rounded w-full shadow-md`}
           />
           {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
         </div>
@@ -67,7 +66,7 @@ function AddRecipeForm() {
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             rows="4"
-            className={`mt-1 p-2 border ${errors.ingredients ? 'border-red-500' : 'border-gray-300'} rounded w-full`}
+            className={`mt-1 p-2 border ${errors.ingredients ? 'border-red-500' : 'border-gray-300'} rounded w-full shadow-md`}
             placeholder="Separate ingredients with commas"
           />
           {errors.ingredients && <p className="text-red-500 text-sm mt-1">{errors.ingredients}</p>}
@@ -80,13 +79,16 @@ function AddRecipeForm() {
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
             rows="6"
-            className={`mt-1 p-2 border ${errors.steps ? 'border-red-500' : 'border-gray-300'} rounded w-full`}
+            className={`mt-1 p-2 border ${errors.steps ? 'border-red-500' : 'border-gray-300'} rounded w-full shadow-md`}
           />
           {errors.steps && <p className="text-red-500 text-sm mt-1">{errors.steps}</p>}
         </div>
 
         <div>
-          <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 shadow-md"
+          >
             Submit Recipe
           </button>
         </div>
