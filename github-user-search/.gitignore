@@ -1,0 +1,10 @@
+# Ignore environment variables file
+.env
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore build directories created by Vercel and others
+.next/
+dist/
+build/
