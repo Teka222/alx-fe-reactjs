@@ -7,7 +7,8 @@ const Search = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = async () => {
+  const handleSearch = async (event) => {
+    event.preventDefault(); // Prevent the form from reloading the page
     setLoading(true);
     setError(''); // Reset error before making a new request
     try {
@@ -22,16 +23,18 @@ const Search = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Enter GitHub username"
-      />
-      <button onClick={handleSearch}>Search</button>
+      <form onSubmit={handleSearch}> {/* Wrapping the input and button in a form */}
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter GitHub username"
+        />
+        <button type="submit">Search</button>
+      </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>} {/* This is where the error message appears */}
+      {error && <p>{error}</p>} {/* Display the error message */}
       {userData && (
         <div>
           <img src={userData.avatar_url} alt={userData.login} />
@@ -48,4 +51,3 @@ const Search = () => {
 };
 
 export default Search;
-
