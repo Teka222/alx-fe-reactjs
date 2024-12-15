@@ -21,6 +21,7 @@ const Search = () => {
       const data = await fetchUserData(username);
       setUserData(data);
     } catch (err) {
+      console.error('API Error:', err); // Add log to debug API errors
       setError(true);
     } finally {
       setLoading(false);
