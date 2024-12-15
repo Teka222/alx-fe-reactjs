@@ -24,7 +24,7 @@ const Search = () => {
 
   return (
     <div>
-      <form onSubmit={handleSearch}> {/* Wrapping the input and button in a form */}
+      <form onSubmit={handleSearch}>
         <input
           type="text"
           value={username}
@@ -35,7 +35,7 @@ const Search = () => {
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>} {/* Display the error message */}
+      {error && <p>{error}</p>} {/* This will show the error message */}
       {userData && (
         <div>
           <img src={userData.avatar_url} alt={userData.login} />
